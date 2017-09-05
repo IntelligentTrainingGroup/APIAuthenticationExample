@@ -1,0 +1,12 @@
+﻿@model LoggedInModel
+
+@{
+    ViewBag.Title = "hello "+@Model.UserModel.FirstName;
+}
+
+<h2>Hello @Model.UserModel.FirstName</h2>
+
+<p>Your authentication ticket is @Model.AuthenticationTicket</p>
+
+<p>!!! NOTE: NEVER expose the authentication ticket (as in the querystring in this example)</p>
+<p>!!! NOTE: NEVER expose the app private token</p>
