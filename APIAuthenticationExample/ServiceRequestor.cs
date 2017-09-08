@@ -32,6 +32,30 @@ namespace APIAuthenticationExample {
             }
         }
 
+        public static t PutRequest<t>(string url, object data, string authenticationTicket = null) {
+            if (string.IsNullOrEmpty(url)) {
+                throw new ArgumentNullException("No url defined.");
+            }
+            Uri address = new Uri(url);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(address);
+            request.Method = WebRequestMethods.Http.Put;
+            if (authenticationTicket != null) {
+                request.Headers.Add("Authorization", authenticationTicket);
+            }
+            request.Accept = "application/json";
+            request.ContentType = "application/json";
+            using (var streamWriter = new StreamWriter(request.GetRequestStream())) {
+                string json = new JavaScriptSerializer().Serialize(data);
+                streamWriter.Write(json);
+            }
+            using (WebResponse response = request.GetResponse()) {
+                using (StreamReader reader = new StreamReader(response.GetResponseStream())) {
+                    string text = reader.ReadToEnd();
+                    return Deserialize<t>(text);
+                }
+            }
+        }
+
         private static t Deserialize<t>(string json) {
             if (String.IsNullOrEmpty(json)) {
                 return default(t);

@@ -1,5 +1,6 @@
 ﻿using APIAuthenticationExample.Models;
 using System;
+using System.Web;
 using System.Web.Mvc;
 
 namespace APIAuthenticationExample.Controllers {
@@ -18,7 +19,9 @@ namespace APIAuthenticationExample.Controllers {
             //Remember this. You have to use it in every query against the api
             string authenticationTicket = authenticationTicketResponse.Data;
 
-            return RedirectToAction("Index", "LoggedIn", new { AuthenticationTicket = authenticationTicket });
+            new ITCContext().SetAuthenticationTicket(authenticationTicket, Response);
+
+            return RedirectToAction("Index", "LoggedIn");
         }
     }
 }

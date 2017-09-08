@@ -5,8 +5,9 @@ namespace APIAuthenticationExample.Controllers {
 
     public class LoggedInController : Controller {
 
-        public ActionResult Index(string authenticationTicket) {
-
+        [ITCAuthorize(RequiredRole = ITCAuthorizeAttribute.UserRoles.RegisteredUser)]
+        public ActionResult Index() {
+            string authenticationTicket = new ITCContext().GetAuthenticationTicket(Request);
             //generating querystring to access the current user
             string currentUserString = string.Format("{0}/Users/Me", Helper.ITCApiServer);
             ITCResponseModel<UserModel> userResponse = ServiceRequestor.GetRequest<ITCResponseModel<UserModel>>(currentUserString, authenticationTicket);

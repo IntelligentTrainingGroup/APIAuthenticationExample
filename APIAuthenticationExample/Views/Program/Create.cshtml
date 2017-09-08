@@ -1,0 +1,16 @@
+﻿@model ProgramModel
+
+@{
+    ViewBag.Title = "Create program";
+}
+
+<h2>Create program</h2>
+
+@using (Html.BeginForm("Create", "Program", FormMethod.Post)) {
+    
+    @Html.TextBoxFor(model => model.ProgramID, new { htmlAttributes = new { @readonly = "readonly" } })
+    <br />
+    @Html.TextBoxFor(model => model.Name)
+    <br />
+    <button class="btn btn-lg btn-primary btn-block btn-signin itc-green" type="submit">Create program</button>
+}

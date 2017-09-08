@@ -7,10 +7,16 @@ namespace APIAuthenticationExample.Controllers {
 
         // GET: Home
         public ActionResult Index() {
-            LoginModel model = new LoginModel() {
-                LoginPagePath = Helper.LoginPagePath
-            };
-            return View(model);
+            if (new ITCContext().GetAuthenticationTicket(Request) == null) {
+              return Redirect(Helper.LoginPagePath);
+            }
+            else {
+              return RedirectToAction("Index", "LoggedIn");
+            }
+            //LoginModel model = new LoginModel() {
+            //    LoginPagePath = Helper.LoginPagePath
+            //};
+            //return View(model);
         }
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Web;
+﻿using System.Configuration;
 
 namespace APIAuthenticationExample {
 
@@ -10,7 +6,7 @@ namespace APIAuthenticationExample {
 
         public static string LoginPagePath {
             get {
-                return string.Format("{0}?returnUrl={1}&app={2}", ConfigurationManager.AppSettings["ITCLoginServer"], ConfigurationManager.AppSettings["LocalLoginRedirectionPage"], ConfigurationManager.AppSettings["AppPublic"]); 
+                return string.Format("{0}?returnUrl={1}&app={2}", ConfigurationManager.AppSettings["ITCLoginServer"], ConfigurationManager.AppSettings["LocalLoginRedirectionPage"], ConfigurationManager.AppSettings["AppPublic"]);
             }
         }
 
